@@ -15,9 +15,11 @@ var Stack = function() {
   };
 
   someInstance.pop = () => {
-    let pop = storage[--key];
-    count--;
-    return pop;
+    if (key > 0) {
+      let pop = storage[--key];
+      count--;
+      return pop;
+    }
   };
 
   someInstance.size = () => {
