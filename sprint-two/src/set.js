@@ -8,7 +8,7 @@ var setPrototype = {};
 
 setPrototype.add = function(item) {
   //if not contains, we add
-  if(!this.contains(item)){
+  if (!this.contains(item)) {
     this._storage.push(item);
   }
 
