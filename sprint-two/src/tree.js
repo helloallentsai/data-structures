@@ -1,11 +1,8 @@
 var Tree = function(value) {
   var newTree = {};
   newTree.value = value;
-
-  // your code here
   newTree.children = [];
   extend(newTree, treeMethods);
-
   return newTree;
 };
 
@@ -19,35 +16,31 @@ var extend = function(to, from) {
 var treeMethods = {};
 
 treeMethods.addChild = function(value) {
-  let child = Node(value);
+  let child = Tree(value);
   this.children.push(child);
 };
 
 treeMethods.contains = function(target) {
-  // console.log(this.children[0].value); yields 5
-  var search = function(node) {
-    if (node.children.length > 0) {
-      for (let i = 0; i < node.children.length; i++) {
-        if (node.children[i].value === target) {
-          return true;
-        }
-      }
+  var node = this;
+  var queue = [node];
+
+  while (queue.length) {
+    node = queue.shift();
+    if (node.value === target) {
+      return true;
     }
-    return false;
-  };
-  return search(this);
+    if (node.children.length > 0) {
+      for (var i = 0; i < node.children.length; i++) {
+        queue.push(node.children[i]);
+      };
+    }
+  }
+  return false;
 };
-
-var Node = function(value) {
-  var node = {};
-  node.value = value;
-  node.children = [];
-  extend(node, treeMethods);
-  return node;
-};
-
 
 
 /*
  * Complexity: What is the time complexity of the above functions?
+ addChild - O(1)
+ contains - O(n)
  */
