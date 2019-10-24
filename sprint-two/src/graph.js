@@ -5,15 +5,6 @@ var Graph = function() {
   this.adjList = new Map();
 };
 
-/*
-{
-  1: [2],
-  2: [1,4,5,7,9],
-  3: [],
-}
-
-*/
-
 // Add a node to the graph, passing in the node's value.
 Graph.prototype.addNode = function(node) {
   this.adjList.set(node, []);
@@ -26,6 +17,11 @@ Graph.prototype.contains = function(node) {
 
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
+  let arr = this.adjList.get(node);
+  for (let i = 0; i < arr.length; i++) {
+    this.removeEdge(node, arr[i]);
+  }
+
   if (this.contains(node)) {
     this.adjList.delete(node);
   }
@@ -37,15 +33,20 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
   let connectedTo = false;
 
   let edgeFrom = this.adjList.get(fromNode);
-  for (var node of edgeFrom) {
-    if (node === toNode) {
-      connectedFrom = true;
+  if (edgeFrom !== undefined) {
+    for (var node of edgeFrom) {
+      if (node === toNode) {
+        connectedFrom = true;
+      }
     }
   }
+
   let edgeTo = this.adjList.get(toNode);
-  for (var node of edgeTo) {
-    if (node === fromNode) {
-      connectedTo = true;
+  if (edgeTo !== undefined) {
+    for (var node of edgeTo) {
+      if (node === fromNode) {
+        connectedTo = true;
+      }
     }
   }
   return connectedFrom && connectedTo;
@@ -62,11 +63,30 @@ Graph.prototype.addEdge = function(fromNode, toNode) {
 
 // Remove an edge between any two specified (by value) nodes.
 Graph.prototype.removeEdge = function(fromNode, toNode) {
+//can use indexOf instead of for loop
+  let edgeFrom = this.adjList.get(fromNode);
+  let edgeFromIdx = edgeFrom.indexOf(toNode);
+  if (edgeFromIdx !== -1) {
+    edgeFrom.splice(edgeFromIdx, 1);
+  }
 
+  let edgeTo = this.adjList.get(fromNode);
+  let edgeToIdx = edgeTo.indexOf(fromNode);
+  if (edgeToIdx !== -1) {
+    edgeTo.splice(edgeToIdx, 1);
+  }
 };
 
 // Pass in a callback which will be executed on each node of the graph.
 Graph.prototype.forEachNode = function(cb) {
+  let result = new Map();
+
+  for (let [node, value] of this.adjList) {
+    result.set(cb(node), value);
+  }
+  console.log(result);
+  return result;
+
 };
 
 /*
