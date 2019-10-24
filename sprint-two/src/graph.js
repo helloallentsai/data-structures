@@ -37,8 +37,8 @@ Graph.prototype.hasEdge = function(fromNode, toNode) {
   let connectedTo = false;
 
   let edgeFrom = this.adjList.get(fromNode);
-  for(var node of edgeFrom){
-    if (node === toNode){
+  for (var node of edgeFrom) {
+    if (node === toNode) {
       connectedFrom = true;
     }
   }
