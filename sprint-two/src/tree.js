@@ -32,7 +32,7 @@ treeMethods.contains = function(target) {
     if (node.children.length > 0) {
       for (var i = 0; i < node.children.length; i++) {
         queue.push(node.children[i]);
-      };
+      }
     }
   }
   return false;
