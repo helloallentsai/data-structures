@@ -23,7 +23,7 @@ setPrototype.contains = function(item) {
 
 setPrototype.remove = function(item) {
   let itemIdx = this._storage.indexOf(item);
-  if(itemIdx !== -1) {
+  if (itemIdx !== -1) {
     this._storage.splice(itemIdx, 1);
   }
 };
