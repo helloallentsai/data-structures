@@ -53,21 +53,33 @@ treeMethods.addChild = function(value) {
 };
 
 treeMethods.contains = function(target) {
-  var node = this;
-  var queue = [node];
-
-  while (queue.length) {
-    node = queue.shift();
+  let found = false;
+  let search = function(node) {
     if (node.value === target) {
-      return true;
+      found = true;
     }
-    if (node.children.length > 0) {
-      for (var i = 0; i < node.children.length; i++) {
-        queue.push(node.children[i]);
-      }
+    for (let i = 0; i < node.children.length; i++) {
+      search(node.children[i]);
     }
-  }
-  return false;
+  };
+  search(this);
+  return found;
+
+  // var node = this;
+  // var queue = [node];
+
+  // while (queue.length) {
+  //   node = queue.shift();
+  //   if (node.value === target) {
+  //     return true;
+  //   }
+  //   if (node.children.length > 0) {
+  //     for (var i = 0; i < node.children.length; i++) {
+  //       queue.push(node.children[i]);
+  //     }
+  //   }
+  // }
+  // return false;
 };
 
 
