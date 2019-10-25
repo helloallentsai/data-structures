@@ -84,7 +84,6 @@ Graph.prototype.forEachNode = function(cb) {
   for (let [node, value] of this.adjList) {
     result.set(cb(node), value);
   }
-  console.log(result);
   return result;
 
 };
