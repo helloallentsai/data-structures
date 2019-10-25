@@ -28,28 +28,40 @@ class BinarySearchTree {
         current.right = newNode;
       }
     }
-    console.log(this);
   }
 
   contains(target) {
+    let current;
+    let queue = [this];
 
+    while (queue.length) {
+      current = queue.shift();
+      if (current.value === target) {
+        return true;
+      } else {
+        if (current.right !== null) {
+          queue.push(current.right);
+        }
+        if (current.left !== null) {
+          queue.push(current.left);
+        }
+      }
+    }
+    return false;
   }
 
   depthFirstLog() {
-
   }
 }
+/*
+       5
+    2    7
+  1  3  4  8
 
+    */
 
 /*
  * Complexity: What is the time complexity of the above functions?
  */
 
 
-/*
-
-       5
-    2    7
-     3  6
-
-    */
