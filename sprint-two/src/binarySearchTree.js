@@ -54,6 +54,24 @@ class BinarySearchTree {
     };
     depthFirst(this);
   }
+
+  breadthFirstLog() {
+    let current;
+    let queue = [this];
+    let result = [];
+
+    while (queue.length) {
+      current = queue.shift();
+      result.push(current.value);
+      if (current.left !== null) {
+        queue.push(current.left);
+      }
+      if (current.right !== null) {
+        queue.push(current.right);
+      }
+    }
+    return result;
+  }
 }
 
 /*
