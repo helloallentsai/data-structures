@@ -6,11 +6,11 @@ var HashTable = function() {
 HashTable.prototype.insert = function(k, v) {
   var index = getIndexBelowMaxForKey(k, this._limit);
   if (this._storage.get(index) === undefined) {
-    this._storage.set(index, [[k,v]]);
+    this._storage.set(index, [[k, v]]);
   } else {
     //can we use retrieve to see if that key already exists
-    if (this.retrieve(k)){
-      this._storage.set(index, [[k,v]]);
+    if (this.retrieve(k)) {
+      this._storage.set(index, [[k, v]]);
     } else {
       this._storage.get(index).push([k, v]);
     }
