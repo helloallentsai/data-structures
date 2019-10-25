@@ -13,20 +13,12 @@ class BinarySearchTree {
       while (current.right !== null) {
         current = current.right;
       }
-      if (newNode.value > current.value) {
-        current.right = newNode;
-      } else {
-        current.left = newNode;
-      }
+      newNode.value > current.value ? current.right = newNode : current.left = newNode;
     } else {
       while (current.left !== null) {
         current = current.left;
       }
-      if (newNode.value < current.value) {
-        current.left = newNode;
-      } else {
-        current.right = newNode;
-      }
+      newNode.value < current.value ? current.left = newNode : current.right = newNode;
     }
   }
 
@@ -50,15 +42,19 @@ class BinarySearchTree {
     return false;
   }
 
-  depthFirstLog() {
+  depthFirstLog(cb) {
+    let depthFirst = function(node) {
+      cb(node.value);
+      if (node.left !== null) {
+        depthFirst(node.left);
+      }
+      if (node.right !== null) {
+        depthFirst(node.right);
+      }
+    };
+    depthFirst(this);
   }
 }
-/*
-       5
-    2    7
-  1  3  4  8
-
-    */
 
 /*
  * Complexity: What is the time complexity of the above functions?
