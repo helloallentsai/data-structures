@@ -1,5 +1,3 @@
-//pseudoclassical - new keyword, assume 'this' is instantiated and returned
-
 // Instantiate a new graph
 var Graph = function() {
   this.adjList = new Map();
@@ -18,8 +16,8 @@ Graph.prototype.contains = function(node) {
 // Removes a node from the graph.
 Graph.prototype.removeNode = function(node) {
   let arr = this.adjList.get(node);
-  for (let i = 0; i < arr.length; i++) {
-    this.removeEdge(node, arr[i]);
+  for (let otherNode of arr) {
+    this.removeEdge(node, otherNode);
   }
 
   if (this.contains(node)) {

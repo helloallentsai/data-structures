@@ -18,7 +18,7 @@ HashTable.prototype.insert = function(k, v) {
 
 HashTable.prototype.retrieve = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  let arr = this._storage[index]; //[['bob', 'barker'], ['jim', 'elliot']]
+  let arr = this._storage[index];
   var result;
   for (var i = 0; i < arr.length; i++) {
     if (arr[i][0] === k) {
@@ -30,27 +30,14 @@ HashTable.prototype.retrieve = function(k) {
 
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
-  let arr = this._storage[index]; //[['bob', 'barker'], ['jim', 'elliot']]
+  let arr = this._storage[index];
   for (var i = 0; i < arr.length; i++) {
     if (arr[i][0] === k) {
       arr.splice(i, 1);
     }
   }
 };
-/*
-{
-  0: ['Loblaw', 'Barker']
-  1: []
-  2: []
-  3: ['Seagal']
-  4: []
-  5: []
-  6: []
-  7: []
-}
 
-[[],[],[], 3]
-*/
 /*
  * Complexity: What is the time complexity of the above functions?
  */
