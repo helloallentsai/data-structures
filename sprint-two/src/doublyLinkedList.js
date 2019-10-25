@@ -5,14 +5,14 @@ var DoublyLinkedList = function() {
   list.tail = null;
   extend(list, DoublyLinkedMethods);
   return list;
-}
+};
 
 var extend = function(to, from) {
   for (var key in from) {
     to[key] = from[key];
   }
   return to;
-}
+};
 
 var DoublyLinkedMethods = {};
 
