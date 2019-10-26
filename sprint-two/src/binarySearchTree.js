@@ -43,16 +43,13 @@ class BinarySearchTree {
   }
 
   depthFirstLog(cb) {
-    let depthFirst = function(node) {
-      cb(node.value);
-      if (node.left !== null) {
-        depthFirst(node.left);
-      }
-      if (node.right !== null) {
-        depthFirst(node.right);
-      }
-    };
-    depthFirst(this);
+    cb(this.value);
+    if (this.left !== null) {
+      this.left.depthFirstLog(cb);
+    }
+    if (this.right !== null) {
+      this.right.depthFirstLog(cb);
+    }
   }
 
   breadthFirstLog() {
