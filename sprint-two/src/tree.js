@@ -36,6 +36,16 @@ treeMethods.contains = function(target) {
   return found;
 };
 
+treeMethods.traverse = function(cb) {
+  let runCB = function(node) {
+    cb(node);
+    for (let i = 0; i < node.children.length; i++) {
+      runCB(node.children[i]);
+    }
+  };
+  runCB(this);
+};
+
 // treeMethods.removeFromParent = function(tree) {
 //   let parent = tree.parent;
 //   let childIdx = parent.children.indexOf(tree.value);
