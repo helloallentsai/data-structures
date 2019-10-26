@@ -20,7 +20,7 @@ HashTable.prototype.insert = function(k, v) {
   //check size and resize accordingly
   this._entries++;
   if (this._entries === this._doubleAt) {
-    this.reSize(this._limit * 2);
+    this.resize(this._limit * 2);
   }
 };
 
@@ -53,12 +53,12 @@ HashTable.prototype.remove = function(k) {
   if (removed) {
     this._entries--;
     if (this._entries === this._halfAt) {
-      this.reSize(this._limit / 2);
+      this.resize(this._limit / 2);
     }
   }
 };
 
-HashTable.prototype.reSize = function(newSize) {
+HashTable.prototype.resize = function(newSize) {
   let newStorage = LimitedArray(newSize);
   let currentStorage = this._storage.status();
 
