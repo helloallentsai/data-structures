@@ -1,6 +1,9 @@
 var HashTable = function() {
   this._limit = 8;
   this._storage = LimitedArray(this._limit);
+  this._doubleAt = Math.floor(this._limit * (3 / 4));
+  this._halfAt = Math.floor(this._limit * (1/4));
+  this._entries = 0;
 };
 
 HashTable.prototype.insert = function(k, v) {
@@ -8,13 +11,16 @@ HashTable.prototype.insert = function(k, v) {
   if (this._storage.get(index) === undefined) {
     this._storage.set(index, [[k, v]]);
   } else {
-    //can we use retrieve to see if that key already exists
     if (this.retrieve(k)) {
       this._storage.set(index, [[k, v]]);
     } else {
       this._storage.get(index).push([k, v]);
     }
-    console.log(this._storage.status());
+  }
+  //method to check size and resize accordingly
+  this._entries++;
+  if (this._entries >= this.doubleAt) {
+    this.reSize(this._limit * 2);
   }
 };
 
@@ -32,12 +38,30 @@ HashTable.prototype.retrieve = function(k) {
 
 HashTable.prototype.remove = function(k) {
   var index = getIndexBelowMaxForKey(k, this._limit);
+  let removed;
   let arr = this._storage.get(index);
   for (var i = 0; i < arr.length; i++) {
     if (arr[i][0] === k) {
       arr.splice(i, 1);
+      removed = true;
+    } else {
+      removed = false;
+      return `no value to remove at key: ${k}`;
     }
   }
+  //method to check size and resize accordingly
+  if (removed) {
+    this._entries--;
+    if (this._entries <= this.halfAt) {
+      this.reSize(this._limit / 2);
+    }
+  }
+};
+
+HashTable.prototype.reSize = function(newSize) {
+  //resize
+
+  this._limit = newSize;
 };
 
 /*
